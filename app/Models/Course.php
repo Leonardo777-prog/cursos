@@ -45,4 +45,24 @@ class Course extends Model
     {
         return $this->belongsTo(Price::class);
     }
+
+    public function requirements()
+    {
+        return $this->hasMany(Requirement::class);
+    }
+
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+    
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
+    }
+
+    public function audience()
+    {
+        return $this->hasMany(Audience::class);
+    }
 }
