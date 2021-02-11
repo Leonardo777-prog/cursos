@@ -30,4 +30,24 @@ class Lesson extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    // relacion 1 a 1 polimorfica
+
+    public function resource()
+    {
+        return $this->morphOne(Resource::class, 'resourceable');
+    }
+
+    // relacion 1 a muchos polimorfica
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function reactions()
+    {
+        return $this->morphMany(Reaction::class, 'reactionable');
+    }
 }
+

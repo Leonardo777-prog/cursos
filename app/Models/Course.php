@@ -65,4 +65,16 @@ class Course extends Model
     {
         return $this->hasMany(Audience::class);
     }
+
+    // relacion 1 a 1 polimorfica
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function lessons()
+    {
+        return $this->hasManyThrough(Lesson::class, Section::class);
+    }
 }
