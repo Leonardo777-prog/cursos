@@ -2,9 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\Audience;
 use App\Models\Course;
+use App\Models\Description;
+use App\Models\Goal;
 use App\Models\Image;
+use App\Models\Lesson;
+use App\Models\Requirement;
+use App\Models\Section;
 use Illuminate\Database\Seeder;
+use Symfony\Component\Console\Descriptor\Descriptor;
 
 class CourseSeeder extends Seeder
 {
@@ -22,6 +29,34 @@ class CourseSeeder extends Seeder
                 'imageable_id' => $curso->id,
                 'imageable_type' => Course::class,
             ]);
+
+            Requirement::factory(4)->create([
+                'course_id' => $curso->id,
+            ]);
+
+            Goal::factory(4)->create([
+                'course_id' => $curso->id,
+            ]);
+
+            Audience::factory(4)->create([
+                'course_id' => $curso->id,
+            ]);
+
+            $sections = Section::factory(4)->create([
+                'course_id' => $curso->id,
+            ]);
+
+            foreach ($sections as $section) {
+                $lessons = Lesson::factory(4)->create([
+                    'section_id' => $section->id,
+                ]);
+
+                foreach ($lessons as $lesson) {
+                    Description::factory(1)->create([
+                        'lesson_id' => $lesson->id
+                    ]);
+                }
+            }
         }
     }
 }
